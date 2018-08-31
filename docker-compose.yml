@@ -1,0 +1,21 @@
+  version: '3'
+  services:
+    db:
+      image: postgres
+      ports:
+        - 5555:5432
+      volumes:
+        - /var/lib/postgresql/data
+    web:
+      build: .
+      volumes:
+        - .:/production
+      # Map port 3000 to  web's port 2999
+      ports:
+        - "2999:2999"
+      environment:
+        PORT: "3000"
+        PGHOST: "db"
+        PGUSER: "postgres"
+      depends_on:
+        - db
