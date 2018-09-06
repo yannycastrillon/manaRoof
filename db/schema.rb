@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_29_005241) do
+ActiveRecord::Schema.define(version: 2018_09_06_040400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,9 @@ ActiveRecord::Schema.define(version: 2018_08_29_005241) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "employable_type"
+    t.bigint "employable_id"
+    t.index ["employable_type", "employable_id"], name: "index_employees_on_employable_type_and_employable_id"
   end
 
   create_table "managers", force: :cascade do |t|

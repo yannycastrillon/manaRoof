@@ -8,8 +8,6 @@
       volumes:
         - /var/lib/postgresql/data
       restart: always
-      networks:
-        - roof
 
     web:
       build: .
@@ -17,8 +15,6 @@
         - .:/production
       ports:
         - "3000:3000"
-      networks:
-        - roof
       restart: always
       depends_on:
         - db
@@ -27,7 +23,3 @@
       image: thajeztah/pgadmin4
       ports:
         - "5050:5050"
-
-  networks:
-    roof:
-      driver: bridge
