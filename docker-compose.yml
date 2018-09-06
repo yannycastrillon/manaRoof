@@ -1,21 +1,33 @@
   version: '3'
   services:
+
     db:
       image: postgres
       ports:
-        - 5555:5432
+        - "5555:5432"
       volumes:
         - /var/lib/postgresql/data
+      restart: always
+      networks:
+        - roof
+
     web:
       build: .
       volumes:
         - .:/production
-      # Map port 3000 to  web's port 2999
       ports:
-        - "2999:2999"
-      environment:
-        PORT: "3000"
-        PGHOST: "db"
-        PGUSER: "postgres"
+        - "3000:3000"
+      networks:
+        - roof
+      restart: always
       depends_on:
         - db
+
+    pg_admin:
+      image: thajeztah/pgadmin4
+      ports:
+        - "5050:5050"
+
+  networks:
+    roof:
+      driver: bridge
