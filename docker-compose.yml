@@ -1,6 +1,5 @@
   version: '3'
   services:
-
     db:
       image: postgres
       ports:
@@ -8,6 +7,8 @@
       volumes:
         - /var/lib/postgresql/data
       restart: always
+      networks:
+        - roof
 
     web:
       build: .
@@ -16,10 +17,34 @@
       ports:
         - "3000:3000"
       restart: always
+      labels:
+        traefik.enabled: 'true'
+        traefik.port: "3000"
+        traefik.docker.network: "roof"
+      networks:
+        - roof
+      stdin_open: true
+      tty: true
       depends_on:
+        - lb
         - db
+        
+    lb:
+      image: traefik:1.5.4-alpine
+      ports:
+        - "80:80"
+        - "443:443"
+        - "8080:8080"
+      networks:
+        - roof
 
     pg_admin:
       image: thajeztah/pgadmin4
       ports:
         - "5050:5050"
+      networks:
+        - roof
+
+  networks:
+    roof:
+      driver: bridge
