@@ -5,7 +5,8 @@
       ports:
         - "5555:5432"
       volumes:
-        - /var/lib/postgresql/data
+        - 'postgres_data:/var/lib/postgresql/data'
+        - './local:/root'
       restart: always
       networks:
         - roof
@@ -28,7 +29,7 @@
       depends_on:
         - lb
         - db
-        
+
     lb:
       image: traefik:1.5.4-alpine
       ports:
@@ -37,6 +38,9 @@
         - "8080:8080"
       networks:
         - roof
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - /dev/null:/traefik.toml
 
     pg_admin:
       image: thajeztah/pgadmin4
@@ -44,6 +48,9 @@
         - "5050:5050"
       networks:
         - roof
+
+  volumes:
+    postgres_data:
 
   networks:
     roof:
