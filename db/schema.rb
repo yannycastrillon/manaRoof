@@ -10,34 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_06_040400) do
+ActiveRecord::Schema.define(version: 2018_08_29_005241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
-    t.string "description"
-    t.string "main_address"
-    t.integer "phone"
-    t.string "county"
-    t.string "city"
-    t.string "state"
-    t.string "country"
+    t.text "description"
+    t.string "street", null: false
+    t.string "phone_number"
+    t.string "county", default: "", null: false
+    t.string "city", default: "", null: false
+    t.string "state", default: "", null: false
+    t.string "country", default: "", null: false
     t.integer "zipcode"
-    t.bigint "contact_id"
+    
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["contact_id"], name: "index_companies_on_contact_id"
   end
 
   create_table "contacts", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.integer "cellphone"
+    t.string "email", default: "", null: false
+    t.string "cell_phone"
+    t.bigint "company_id"
     t.bigint "manager_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+
+    t.index ["company_id"], name: "index_contacts_on_company_id"
+    t.index ["email"], name: "index_contacts_on_email"
     t.index ["manager_id"], name: "index_contacts_on_manager_id"
   end
 
@@ -45,32 +49,38 @@ ActiveRecord::Schema.define(version: 2018_09_06_040400) do
     t.string "first_name"
     t.string "last_name"
     t.date "date_of_birth"
+    t.string "gender"
+    t.string "driver_license", null: false
     t.decimal "salary_per_hour"
-    t.integer "ssn"
-    t.integer "cell_phone"
-    t.string "email"
-    t.string "main_address"
+    t.string "ssn", default: ""
+    t.string "cell_phone"
+    t.string "email", default: "", null: false
+    t.string "street"
     t.string "second_address"
-    t.string "city"
-    t.string "state"
+    t.string "city", default: "", null: false
+    t.string "state", default: "", null: false
     t.integer "zipcode"
     t.string "nationality"
-    t.datetime "start_date"
-    t.integer "phone"
+    t.date "start_date"
+    t.string "phone_number"
     t.string "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "employable_type"
     t.bigint "employable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+
+    t.index ["email", "driver_license"], name: "index_employees_on_email_and_driver_license"
     t.index ["employable_type", "employable_id"], name: "index_employees_on_employable_type_and_employable_id"
   end
 
   create_table "managers", force: :cascade do |t|
+
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "workers", force: :cascade do |t|
+
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

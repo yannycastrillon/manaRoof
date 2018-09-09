@@ -1,3 +1,3 @@
 class Worker < ApplicationRecord
-  has_many :employees, as: :employable
+  has_one :employee, as: :employable
 end

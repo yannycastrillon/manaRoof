@@ -1,3 +1,4 @@
 class Company < ApplicationRecord
-  belongs_to :contact
+  has_many :contacts
+  has_many :managers, through: :contacts
 end
