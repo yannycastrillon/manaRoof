@@ -11,6 +11,7 @@ class CreateCompanies < ActiveRecord::Migration[5.2]
       t.string :country,        default: '', null: false
       t.integer :zipcode
 
+      t.belongs_to :contact, foreign_key: true
       t.timestamps
     end
   end

@@ -1,5 +1,6 @@
 class Employee < ApplicationRecord
   belongs_to :employable, polymorphic: true
+  has_many :teams
 
   validates :email, :driver_license, uniqueness: true
 

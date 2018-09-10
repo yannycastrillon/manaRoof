@@ -6,9 +6,6 @@ class CreateContacts < ActiveRecord::Migration[5.2]
       t.string :email,          default: '', null: false, unique: true
       t.string :cell_phone
 
-      t.references :company
-      t.references :manager
-
       t.timestamps
     end
     add_index :contacts, [:email]
