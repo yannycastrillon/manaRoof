@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_10_040705) do
+ActiveRecord::Schema.define(version: 2018_09_12_032749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,12 +105,32 @@ ActiveRecord::Schema.define(version: 2018_09_10_040705) do
     t.index ["phase_id"], name: "index_projects_on_phase_id"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.date "date_added"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "name"
     t.bigint "employee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["employee_id"], name: "index_teams_on_employee_id"
+  end
+
+  create_table "worker_roles", force: :cascade do |t|
+    t.date "date_started"
+    t.boolean "active"
+    t.string "years_experience"
+    t.bigint "role_id"
+    t.bigint "worker_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_worker_roles_on_role_id"
+    t.index ["worker_id"], name: "index_worker_roles_on_worker_id"
   end
 
   create_table "workers", force: :cascade do |t|
@@ -124,4 +144,6 @@ ActiveRecord::Schema.define(version: 2018_09_10_040705) do
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "phases"
   add_foreign_key "teams", "employees"
+  add_foreign_key "worker_roles", "roles"
+  add_foreign_key "worker_roles", "workers"
 end
