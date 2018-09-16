@@ -2,7 +2,8 @@ class Employee < ApplicationRecord
   belongs_to :employable, polymorphic: true
   has_many :teams
 
-  validates :email, :driver_license, uniqueness: true
+  validates :email, uniqueness: true
+  validates :driver_license, uniqueness: true
 
   STATUSES = {
     active: 'active',
