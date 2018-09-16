@@ -16,14 +16,10 @@ FactoryBot.define do
     nationality { Faker::Nation.nationality }
 
     trait :as_worker do
-      # employable_type { "Worker" }
-      # employable_id { create(:worker) }
       employable { create(:worker) }
     end
 
     trait :as_manager do
-      # employable_type { "Manager" }
-      # employable_id { create(:manager) }
       employable { create(:manager) }
     end
   end

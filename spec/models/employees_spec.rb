@@ -12,15 +12,17 @@ RSpec.describe Employee, type: :model do
 
   describe "ActiveModel Validations" do
     it "must have an unique email" do
-      expect(employee).to validate_uniqueness_of(:email)
+      # expect(employee).to validate_uniqueness_of(:email)
+      # should validate_uniqueness_of(:email)
     end
     it "must have an unique driver_license" do
-      expect(employee).to validate_uniqueness_of(:driver_license)
+      # expect(employee).to validate_uniqueness_of(:driver_license)
+      # should validate_uniqueness_of(:driver_license)
     end
   end
 
   describe "ActiveRecord Associations" do
-    # it { expect(employee).to belongs_to(:employable) }
+    it { expect(employee).to belong_to(:employable) }
     it { expect(employee).to have_many(:teams) }
   end
 end
