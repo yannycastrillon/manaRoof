@@ -1,5 +1,5 @@
 class EmployeesController < ApplicationController
-  before_action :set_employee except: [:index]
+  before_action :set_employee, except: [:index]
 
   def index
     render json: Employee.all

@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe EmployeesController, type: :controller do
   describe "get #index" do
     context "when user is login" do
