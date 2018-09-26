@@ -20,6 +20,7 @@ class CreateEmployees < ActiveRecord::Migration[5.2]
       t.string :phone_number
       t.string :status
 
+      t.belongs_to :team, foreign_key: true
       t.references :employable, polymorphic: true, index: true
 
       t.timestamps

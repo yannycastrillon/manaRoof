@@ -1,6 +1,6 @@
 class Employee < ApplicationRecord
   belongs_to :employable, polymorphic: true
-  has_many :teams
+  belongs_to :team
 
   validates :email, uniqueness: true
   validates :driver_license, uniqueness: true
@@ -12,7 +12,7 @@ class Employee < ApplicationRecord
   scope :inactives, -> {
     self.where(active: false)
   }
-  
+
   STATUSES = {
     active: 'active',
     no_active: 'no_active'

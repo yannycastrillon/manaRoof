@@ -14,6 +14,7 @@ FactoryBot.define do
     state { Faker::Address.state_abbr }
     zipcode { Faker::Address.zip_code }
     nationality { Faker::Nation.nationality }
+    team { create(:team) }
 
     trait :as_worker do
       employable { create(:worker) }
@@ -23,5 +24,4 @@ FactoryBot.define do
       employable { create(:manager) }
     end
   end
-
 end
