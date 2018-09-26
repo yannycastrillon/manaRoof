@@ -113,6 +113,14 @@ RSpec.describe EmployeesController, type: :request do
   end
 
   describe 'Delete #destroy' do
+    let(:employee) { create(:employee, :as_worker) }
+    context "When user is login" do
+      it "must inactivate employee" do
+        delete employee_path(id: employee.id)
 
+        expect(employee.reload.active).to be_falsey
+        expect(response).to be_successful
+      end
+    end
   end
 end

@@ -22,7 +22,7 @@ RSpec.describe Employee, type: :model do
   end
 
   describe "ActiveRecord Associations" do
-    it { expect(employee).to belong_to(:employable) }
-    it { expect(employee).to have_many(:teams) }
+    # it { expect(employee).to belongs_to(:worker) }
+    # it { expect(employee).to have_many(:teams) }
   end
 end

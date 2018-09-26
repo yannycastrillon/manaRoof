@@ -16,7 +16,6 @@ class EmployeesController < ApplicationController
     else
       render json: new_employee.errors, status: :unprocessable_entity
     end
-
   end
 
   def update
@@ -34,7 +33,14 @@ class EmployeesController < ApplicationController
 
   def destroy
     if @employee
-      @employee.destroy
+      if @employee.update_attributes(active: false)
+        render json: @employee, status: :ok
+      else
+        render json: @employee.errors, status: :unprocessable_entity
+      end
+    else
+      render json: { errors: [I18n.t('errors.employee.none_found')] },
+                   status: :bad_request
     end
   end
 
