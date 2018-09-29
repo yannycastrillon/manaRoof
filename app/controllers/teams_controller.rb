@@ -1,6 +1,7 @@
 class TeamsController < ApplicationController
+  include TeamHelper
   before_action :set_team, except: [:index, :create]
-  before_action :set_employee, only: [:add_employee]
+  before_action :set_employee, only: [:add_employee, :remove_employee]
 
   def index
     render json: Team.all, status: :ok
@@ -44,14 +45,11 @@ class TeamsController < ApplicationController
   end
 
   def add_employee
-    render json: { errors: 'Team not found' }, status: :bad_request unless @team
-    render json: { errors: 'Employee not found'}, status: :bad_request unless @employee
+    add_team_employee(@employee, @team)
+  end
 
-    if @team.update_attributes(employee_id: @employee.id)
-      render json: @team, status: :ok
-    else
-      render json: { errors: [I18n.t('errors.team.none_found')] }, status: :bad_request
-    end
+  def remove_employee
+    remove_team_employee(@employee, @team)
   end
 
   private

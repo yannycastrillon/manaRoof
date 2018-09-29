@@ -108,26 +108,56 @@ RSpec.describe TeamsController, type: :request do
 
     context "when team and employee exists" do
       it "must add employee to the team" do
-        post add_employee_team_path(id: team.id), params: { team: { employee_id: employee.id } }
-
-        expect(response.body.team.employee_id).to eq employee.id
+        expect {
+          post add_employee_team_path(id: team.id), params: { employee_id: employee.id }
+        }.to change{team.employees.count}.by(1)
         expect(response).to be_successful
       end
     end
     context "when employee doesn't exists" do
-      it "must expect a bad request" do
+      it "must expect a not found request" do
         post add_employee_team_path(id: team.id)
 
-        expect(response).to have_http_status(:bad_request)
-        expect(response.errors).to include("Employee not found")
+        expect(response).to have_http_status(:not_found)
+        expect(JSON.parse(response.body)['errors']).to include("Couldn't find Employee without an ID")
       end
     end
     context "when team doesn't exists" do
-      it "must expect a bad request" do
+      it "must expect a not found request" do
         post add_employee_team_path(id: 9999)
 
-        expect(response).to have_http_status(:bad_request)
-        expect(response.errors).to include("Team not found")
+        expect(response).to have_http_status(:not_found)
+        expect(JSON.parse(response.body)['errors']).to include("Couldn't find Team with 'id'=9999")
+      end
+    end
+  end
+
+  describe '#remove_employee' do
+    let(:team) { create(:team) }
+    let(:employee) { create(:employee, :as_worker) }
+
+    context "when team and employee exists" do
+      it "must remove employee from the team" do
+        delete remove_employee_team_path(id: team.id), params: { employee_id: employee.id }
+
+        expect(team.employees).to_not include(employee)
+        expect(response).to be_successful
+      end
+    end
+    context "when employee doesn't exists" do
+      it "must expect a not found request" do
+        delete remove_employee_team_path(id: team.id)
+
+        expect(response).to have_http_status(:not_found)
+        expect(JSON.parse(response.body)['errors']).to include("Couldn't find Employee without an ID")
+      end
+    end
+    context "when team doesn't exists" do
+      it "must expect a not found request" do
+        delete remove_employee_team_path(id: 9999)
+
+        expect(response).to have_http_status(:not_found)
+        expect(JSON.parse(response.body)['errors']).to include("Couldn't find Team with 'id'=9999")
       end
     end
   end
