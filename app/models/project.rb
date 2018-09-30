@@ -4,4 +4,13 @@ class Project < ApplicationRecord
 
   belongs_to :company
   belongs_to :phase
+
+
+  CONSTRUCTION_STAGE = {
+    stage1: "Load Material",
+    stage2: "Install or takeoff Roof",
+    stage3: "Roof Detail",
+    stage4: "Apply Roof Details",
+    stage5: "Cleanup",
+  }.freeze
 end
