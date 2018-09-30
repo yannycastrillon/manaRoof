@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_26_004445) do
+ActiveRecord::Schema.define(version: 2018_09_29_061520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,17 @@ ActiveRecord::Schema.define(version: 2018_09_26_004445) do
     t.index ["email"], name: "index_contacts_on_email"
   end
 
+  create_table "employee_teams", force: :cascade do |t|
+    t.bigint "employee_id"
+    t.bigint "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "active"
+    t.string "status"
+    t.index ["employee_id"], name: "index_employee_teams_on_employee_id"
+    t.index ["team_id"], name: "index_employee_teams_on_team_id"
+  end
+
   create_table "employees", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -60,6 +71,7 @@ ActiveRecord::Schema.define(version: 2018_09_26_004445) do
     t.date "start_date"
     t.string "phone_number"
     t.string "status"
+    t.bigint "team_id"
     t.string "employable_type"
     t.bigint "employable_id"
     t.datetime "created_at", null: false
@@ -67,6 +79,7 @@ ActiveRecord::Schema.define(version: 2018_09_26_004445) do
     t.boolean "active", default: true
     t.index ["email", "driver_license"], name: "index_employees_on_email_and_driver_license"
     t.index ["employable_type", "employable_id"], name: "index_employees_on_employable_type_and_employable_id"
+    t.index ["team_id"], name: "index_employees_on_team_id"
   end
 
   create_table "managers", force: :cascade do |t|
@@ -116,10 +129,9 @@ ActiveRecord::Schema.define(version: 2018_09_26_004445) do
 
   create_table "teams", force: :cascade do |t|
     t.string "name"
-    t.bigint "employee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["employee_id"], name: "index_teams_on_employee_id"
+    t.boolean "active", default: true
   end
 
   create_table "worker_roles", force: :cascade do |t|
@@ -140,11 +152,11 @@ ActiveRecord::Schema.define(version: 2018_09_26_004445) do
   end
 
   add_foreign_key "companies", "contacts"
+  add_foreign_key "employees", "teams"
   add_foreign_key "project_team_schedulers", "projects"
   add_foreign_key "project_team_schedulers", "teams"
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "phases"
-  add_foreign_key "teams", "employees"
   add_foreign_key "worker_roles", "roles"
   add_foreign_key "worker_roles", "workers"
 end

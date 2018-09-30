@@ -12,4 +12,4 @@
     Employee.create(employable: Worker.create, first_name: "Arya", last_name:"Stark",driver_license:"as111009", email: "arya.stark@example.com")
     Employee.create(employable: Worker.create, first_name: "Jaime", last_name:"Lannister",driver_license:"jm123321", email: "jaime.lannister@example.com")
 
-    Contact.create(company: Company.create(name: "Winterfell", street: "3462 North Path"), manager: Employee.where(first_name:"Cercei").first.employable, first_name: "Sansa", last_name:"Stark", email: "sansa.stark@example.com")
+    # Contact.create(company: Company.create(name: "Winterfell", street: "3462 North Path"), manager: Employee.where(first_name:"Cercei").first.employable, first_name: "Sansa", last_name:"Stark", email: "sansa.stark@example.com")

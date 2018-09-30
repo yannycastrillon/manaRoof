@@ -22,6 +22,9 @@ FactoryBot.define do
     trait :as_manager do
       employable { create(:manager) }
     end
-  end
 
+    trait :with_team do
+      team { create(:team) }
+    end
+  end
 end
