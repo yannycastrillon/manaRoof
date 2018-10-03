@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'pages#index'
   resources :employees
   resources :teams do
     post 'add_employee', on: :member
