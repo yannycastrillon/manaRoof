@@ -5,10 +5,17 @@ FROM ruby:2.3.7
 ENV APP_HOME /production
 
 # Instalation of dependencies
-RUN apt-get update -qq && \
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    curl -sL https://deb.nodesource.com/setup_9.x | bash - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && \
     apt-get install -y \
     build-essential \
+    wget \
     vim \
+    dnsutils \
+    netcat \
+    curl \
     dnsutils \
     libpq-dev \
     nodejs && \
@@ -19,6 +26,8 @@ RUN apt-get update -qq && \
     /var/lib/dpkg \
     /var/lib/cache \
     /var/lib/log \
+    yarn && \
+    rm -rf /var/lib/apt/lists/*
 
 # Create a directory for our application and set it as the working directory
 RUN mkdir $APP_HOME

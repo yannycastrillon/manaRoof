@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # get 'hello_world', to: 'hello_world#index'
+  root 'pages#index'
   resources :employees
   resources :teams do
     post 'add_employee', on: :member
