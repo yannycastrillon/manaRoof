@@ -16,10 +16,8 @@ const config = {
   },
 
   resolve: {
-    extensions: ['.js', '.jsx'],
-    alias: {
-      images: pathLib.resolve(__dirname, '../app/assets/images')
-    }
+    enforceModuleExtension: false,
+    extensions: ['.js', '.jsx']
   },
 
   plugins: [new webpack.EnvironmentPlugin({ NODE_ENV: 'development'})],
