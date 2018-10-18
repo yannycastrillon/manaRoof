@@ -10,16 +10,19 @@ export default css`
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
+    font-family: sans-serif;
+    font-weight: 200;
   }
   li {
     margin: 1rem 2.5rem;
   }
   a {
-    color: ${Colors.black};
+    color: ${Colors.linksWhite};
     transition: all .2s ease-in-out;
+    text-decoration: none;
   }
   a:hover {
-    text-decoration: none;
+    border-bottom: solid 1px;
   }
 
   @media screen and (min-width: 800px) {
@@ -27,7 +30,7 @@ export default css`
       flex-direction: row;
       justify-content: space-between;
       height: auto;
-      font-family: "Graphik Regular";
+      font-family: Graphik;
       align-items: center;
     }
   }

@@ -3,7 +3,7 @@ import Colors from '../../../../lib/theme/colors';
 
 export default css`
   .main-menu {
-    backgound: ${Colors.tan};
+    background: ${Colors.gray};
     position: fixed;
     top: 0;
     right: 0;
