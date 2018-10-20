@@ -16,12 +16,12 @@ export default css`
   li {
     margin: 1rem 2.5rem;
   }
-  a {
+  span {
     color: ${Colors.linksWhite};
     transition: all .2s ease-in-out;
     text-decoration: none;
   }
-  a:hover {
+  span:hover {
     border-bottom: solid 1px;
   }
 

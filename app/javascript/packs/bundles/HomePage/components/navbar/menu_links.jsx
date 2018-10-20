@@ -1,4 +1,5 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 import menuLinkStyle from './menu_link.styles';
 
 class MenuLinks extends React.Component {
@@ -26,9 +27,9 @@ class MenuLinks extends React.Component {
     return (
       <ul className="menu-links">
         <li>{this.renderLogInOrLogOutLink()}</li>
-        <li><a href="/about_us">About ManaRoof</a></li>
-        <li><a href="/employees">Employee</a></li>
-        <li><a href="/projects">Projects</a></li>
+        <li><span><NavLink to="/about_us"  style={{color: 'white', textDecoration: 'none'}}>About ManaRoof</NavLink></span></li>
+        <li><span><NavLink to="/employees" className="nav_link" activeClassName="active">Employee</NavLink></span></li>
+        <li><span><NavLink to="/projects" className="nav_link" activeClassName="active">Projects</NavLink></span></li>
         <style jsx>{menuLinkStyle}</style>
       </ul>
     )
