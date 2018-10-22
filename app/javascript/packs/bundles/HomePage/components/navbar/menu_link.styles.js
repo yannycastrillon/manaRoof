@@ -1,7 +1,7 @@
 import css from 'styled-jsx/css';
 import Colors from '../../../../lib/theme/colors';
 
-export default css`
+export const menuLinkStyle = css`
   ul {
     list-style-type: none;
     margin: 0;
@@ -16,13 +16,13 @@ export default css`
   li {
     margin: 1rem 2.5rem;
   }
-  span {
+  a {
     color: ${Colors.linksWhite};
     transition: all .2s ease-in-out;
     text-decoration: none;
   }
-  span:hover {
-    border-bottom: solid 1px;
+  li:hover {
+    border-bottom: solid 1px ${Colors.linksWhite};
   }
 
   @media screen and (min-width: 800px) {
@@ -35,3 +35,9 @@ export default css`
     }
   }
 `;
+
+export const navLinkStyle = {
+  color: Colors.linksWhite,
+  transition: 'all .2s ease-in-out',
+  textDecoration: 'none'
+}

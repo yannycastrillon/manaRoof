@@ -1,5 +1,6 @@
 import React from 'react';
 import css from 'styled-jsx/css';
+import {Link} from 'react-router-dom';
 import footerStyles from './footer.styles';
 
 export const leftSection = () => {
@@ -25,22 +26,20 @@ export const middleSection = () => {
     <div>
       <h3>Company</h3>
       <ul className="r-subheader">
-      <li><a href="/about_us">About Us</a></li>
-      <li><a href="#" target="_blank">Work with us</a></li>
-      <li><a href="#" target="_blank">Mission</a></li>
-      <li><a href="#">Vision</a></li>
-    </ul>
-    <h3>Follow Us</h3>
-    <div >
-      <ul className="r-subheader">
-        <li className="social-links">
-          <a href="#" target="_blank"><i className="fa fa-facebook" /></a>
-          <a href="#" target="_blank"><i className="fa fa-twitter" /></a>
-          <a href="#" target="_blank"><i className="fa fa-instagram" /></a>
-        </li>
+        <li><Link to="/about_us">About Us</Link></li>
+        <li><Link to="/join_us">Join Us</Link></li>
       </ul>
-    </div>
-    <style jsx>{ footerStyles }</style>
+      <h3>Follow Us</h3>
+      <div>
+        <ul className="r-subheader">
+          <li className="social-links">
+            <a href="#" target="_blank"><i className="fa fa-facebook" /></a>
+            <a href="#" target="_blank"><i className="fa fa-twitter" /></a>
+            <a href="#" target="_blank"><i className="fa fa-instagram" /></a>
+          </li>
+        </ul>
+      </div>
+      <style jsx>{ footerStyles }</style>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 const colors = {
   roofRed: "#FF5A5F",
   tan: "#edeee8",
-  black: "##2b2d2e",
+  black: "#2b2d2e",
   blackDisabled: "rgba(43, 45, 46, 0.25)",
   white: "#ffffff",
   white25: "rgba(255,255,255,0.25)",
@@ -14,6 +14,8 @@ const colors = {
   gray: "#465451",
   lightGray: "#394b47",
   linksWhite: "#FAFFFF",
+  paragraph: "#434343"
+
 
 }
 
