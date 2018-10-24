@@ -1,4 +1,4 @@
-import css from 'style-jsx/css';
+import css from 'styled-jsx/css';
 
 export default css`
   .r-card {

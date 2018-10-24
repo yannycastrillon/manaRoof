@@ -3,11 +3,13 @@ import baseStyles from '../theme/base.styles';
 
 class BaseLayout extends React.Component {
   render() {
-    <div className="manaroof-theme">
-      {this.props.children}
-      <style jsx global>{baseStyles}</style>
-    </div>
+    return (
+      <div className="manaroof-theme">
+        {this.props.children}
+        <style jsx global>{baseStyles}</style>
+      </div>
+    )
   }
 }
 
-export default BaseLayout
+export default BaseLayout;

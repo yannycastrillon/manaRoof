@@ -1,5 +1,6 @@
+import React from 'react';
 
-const CardContent = props => {
+const CardContent = props => (
   <div className="card-content">
     {props.children}
     <style jsx>{`
@@ -16,4 +17,6 @@ const CardContent = props => {
       }
     `}</style>
   </div>
-}
+)
+
+export default CardContent;

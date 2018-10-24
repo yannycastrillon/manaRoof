@@ -1,10 +1,25 @@
 import React from 'react';
 import InputText from '../../../components/forms/inputs/text_input';
+import employeeFormStyles from './employee_form.styles';
 import { withFormik } from 'formik';
-import EmployeeSchema '../schemas/employee.schema';
+import employeeSchema from '../schemas/employee.schema';
 import axios from 'axios';
 
 class InnerForm extends React.Component {
+  renderErrors = (errors, key) => {
+    if (errors.hasOwnProperty('inner')) {
+      const errorObect = errors.InnerForm
+        .filter(error => {
+          return error.path === key;
+        })
+        .map(errorObject => {
+          return errorObject.errors[0];
+        });
+      return errorObject;
+    }
+    return [];
+  };
+
   render() {
     const {
       values,
@@ -25,11 +40,18 @@ class InnerForm extends React.Component {
               onChange={handleChange}
               onBlur={handleBlur}
             />
+            <div className="employee-form__error-container">
+              {touched.first_name &&
+                this.renderErrors(errors, 'first_name').map((ele, ind) => (
+                  <p key={ind}>{ele}</p>
+                ))
+              }
+            </div>
           </div>
-          <button type="submit" disable={!isValid} className="rbutton">
+          <button type="submit" disable={!isValid} className="r-button">
             Create Employee
           </button>
-          <style jsx></style>
+          <style jsx>{employeeFormStyles}</style>
         </div>
       </form>
     )
@@ -39,7 +61,7 @@ class InnerForm extends React.Component {
 
 const Employee = withFormik({
   validate: (value, props) => {
-    return EmployeeSchema(values).validate(values, { abortEarly: false });
+    return employeeSchema(values).validate(values, { abortEarly: false });
   },
   handleSubmit: (
     values,

@@ -1,4 +1,5 @@
-import Colors from '../../lib/theme/color';
+import React from 'react';
+import Colors from '../../theme/colors';
 
 const CardHeader = ({title, image}) => (
   <div className="card-header">

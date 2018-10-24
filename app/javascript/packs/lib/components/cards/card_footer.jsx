@@ -1,3 +1,4 @@
+import React from 'react';
 
 const CardFooter = props => (
   <div className="card-footer">
@@ -9,3 +10,5 @@ const CardFooter = props => (
     `}</style>
   </div>
 )
+
+export default CardFooter;
