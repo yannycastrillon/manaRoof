@@ -2,6 +2,7 @@ const colors = {
   roofRed: "#FF5A5F",
   tan: "#edeee8",
   black: "#2b2d2e",
+  greyHorizontalLine: "#cccccc",
   blackDisabled: "rgba(43, 45, 46, 0.25)",
   warnOrange: "#fe7700",
   blackDisabled: "rgba(43, 45, 46, 0.25)",
