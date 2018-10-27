@@ -1,10 +1,11 @@
 import React from 'react';
 import classnames from 'classnames';
+import MaskedInput from 'react-text-mask';
 import textInputCSS, { hintTextCSS } from './text_input.styles';
 
 import PropTypes from 'prop-types';
 
-class TextInput extends React.Component {
+class DateInput extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -20,11 +21,6 @@ class TextInput extends React.Component {
       'is--focused': this.state.isFocused,
       'has--value': this.state.hasValue
     })
-  }
-
-  onTextInputChange = e => {
-    this.setState({ hasValue: !!e.target.value.length });
-    this.props.onChange(e);
   }
 
   onInputBlur = e => {
@@ -72,7 +68,7 @@ class TextInput extends React.Component {
         <div className="input-container__input-field">
           <label>{this.props.label}</label>
           {this.renderHintText()}
-          <input
+          <MaskedInput
             type={this.props.type || 'text'}
             name={this.props.name}
             value={this.props.value}
@@ -81,16 +77,17 @@ class TextInput extends React.Component {
             onChange={this.onTextInputChange}
             onClick={this.onInputClick}
             ref="j_text_input"
+            mask={[/\d/, /\d/,"/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/]}
           />
         </div>
         <style jsx>{textInputCSS}</style>
       </div>
-    );
+    )
   }
 }
 
-TextInput.propTypes = {
+DateInput.propTypes = {
   label: PropTypes.string.isRequired
 }
 
-export default TextInput;
+export default DateInput;
