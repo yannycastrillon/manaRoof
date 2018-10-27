@@ -1,9 +1,7 @@
 import css from 'styled-jsx/css';
 import Colors from '../../../lib/theme/colors';
 
-export default css``;
-
-export const employeeFormStyles = css`
+export default css`
   .employee-form {
     padding: 2rem 2rem 2.5rem;
   }

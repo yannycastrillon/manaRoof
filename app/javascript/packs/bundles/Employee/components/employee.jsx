@@ -1,16 +1,21 @@
 import React from 'react';
-import InputText from '../../../components/forms/inputs/text_input';
+// Forms components
+import TextInput from '../../../components/forms/inputs/text_input';
+import DateInput from '../../../components/forms/inputs/date_input';
+
+// Styles
 import employeeFormStyles from './employee_form.styles';
 import { withFormik } from 'formik';
 import employeeSchema from '../schemas/employee.schema';
 import axios from 'axios';
 
 class InnerForm extends React.Component {
-  renderErrors = (errors, key) => {
+  renderErrors = (errors, field) => {
+    console.log("Errors Employee: ", errors)
     if (errors.hasOwnProperty('inner')) {
-      const errorObect = errors.InnerForm
+      const errorObject = errors.inner
         .filter(error => {
-          return error.path === key;
+          return error.path === field;
         })
         .map(errorObject => {
           return errorObject.errors[0];
@@ -30,25 +35,75 @@ class InnerForm extends React.Component {
       handleSubmit,
       isValid
     } = this.props;
+    console.log("props", this.props);
     return (
       <form onSubmit={handleSubmit} autoComplete="off">
         <div className="employee-form">
           <div className="input-container">
-            <InputText
+            <TextInput
               label="First Name"
               name="first_name"
               onChange={handleChange}
               onBlur={handleBlur}
+              hintText="Enter yourFirst Name"
             />
             <div className="employee-form__error-container">
               {touched.first_name &&
-                this.renderErrors(errors, 'first_name').map((ele, ind) => (
-                  <p key={ind}>{ele}</p>
+                this.renderErrors(errors, 'first_name').map((e, i) => (
+                  <p key={i}>{e}</p>
                 ))
               }
             </div>
           </div>
-          <button type="submit" disable={!isValid} className="r-button">
+          <div className="input-container">
+            <TextInput
+              label="Last Name"
+              name="last_name"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              hintText="Enter your Last Name"
+            />
+            <div className="employee-form__error-container">
+              {touched.last_name &&
+                this.renderErrors(errors, 'last_name').map((e, i) => (
+                  <p key={i}>{e}</p>
+                ))
+              }
+            </div>
+          </div>
+          <div className="input-container">
+            <TextInput
+              label="Email"
+              name="email"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              hintText="Enter your Email"
+            />
+            <div className="employee-form__error-container">
+             {touched.email &&
+               this.renderErrors(errors, 'email').map((e, i) => {
+                 return <p key={i}>{e}</p>
+               })
+             }
+            </div>
+          </div>
+          <div className="input-container">
+            <DateInput
+              label="Date of birth"
+              name="date_of_birth"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              hintText="Enter your Date of birth"
+            />
+            <div className="employee-form__error-container">
+             {touched.date_of_birth &&
+               this.renderErrors(errors, 'date_of_birth').map((e, i) => {
+                 return <p key={i}>{e}</p>
+               })
+             }
+            </div>
+          </div>
+          <button type="submit" disabled={!isValid} className="r-button">
             Create Employee
           </button>
           <style jsx>{employeeFormStyles}</style>
@@ -60,7 +115,7 @@ class InnerForm extends React.Component {
 
 
 const Employee = withFormik({
-  validate: (value, props) => {
+  validate: (values, props) => {
     return employeeSchema(values).validate(values, { abortEarly: false });
   },
   handleSubmit: (
