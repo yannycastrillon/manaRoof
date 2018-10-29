@@ -45,7 +45,7 @@ class InnerForm extends React.Component {
               name="first_name"
               onChange={handleChange}
               onBlur={handleBlur}
-              hintText="Enter yourFirst Name"
+              hintText="Enter your First Name"
             />
             <div className="employee-form__error-container">
               {touched.first_name &&
@@ -93,7 +93,7 @@ class InnerForm extends React.Component {
               name="date_of_birth"
               onChange={handleChange}
               onBlur={handleBlur}
-              hintText="Enter your Date of birth"
+              hintText="MM-DD-YYYY"
             />
             <div className="employee-form__error-container">
              {touched.date_of_birth &&

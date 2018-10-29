@@ -16,7 +16,6 @@ export default css`
     cursor: auto;
     color: Gray;
   }
-
   label {
     position: absolute;
     line-height: 22px;

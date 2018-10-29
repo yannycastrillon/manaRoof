@@ -21,7 +21,7 @@ const Layout = props => (
       <style jsx>{`
         .layout-single-card {
           min-height: 100vh;
-          background: ${Colors.purple};
+          background: ${Colors.white};
           display: flex;
           flex-direction: column;
           align-items: center;

@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
-import MaskedInput from 'react-text-mask';
-import textInputCSS, { hintTextCSS } from './text_input.styles';
+import moment from 'moment';
+import TextInputCSS, { hintTextCSS } from './text_input.styles';
 
 import PropTypes from 'prop-types';
 
@@ -9,6 +9,7 @@ class DateInput extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      moment: moment(),
       isFocused: false,
       isTouched: false,
       hasValue: false
@@ -23,6 +24,15 @@ class DateInput extends React.Component {
     })
   }
 
+  onTextInputChange = e => {
+    var date = e.target.value
+    console.log(date);
+    this.setState({
+      hasValue: !!e.target.value.length
+    });
+    this.props.onChange(e);
+  }
+
   onInputBlur = e => {
     this.setState({ isFocused: false })
     this.props.onBlur(e);
@@ -30,12 +40,6 @@ class DateInput extends React.Component {
 
   onInputFocus = e => {
     this.setState({ isTouched: true, isFocused: true });
-  }
-
-  onInputClick = () => {
-    if (this.props.onUpdateView) {
-      this.props.onUpdateView();
-    }
   }
 
   renderHintText() {
@@ -56,7 +60,7 @@ class DateInput extends React.Component {
         <div>
           <hr aria-hidden="true" className="baseline" />
           <hr aria-hidden="true" className="scored" />
-          <style jsx>{textInputCSS}</style>
+          <style jsx>{TextInputCSS}</style>
         </div>
       );
     }
@@ -68,7 +72,7 @@ class DateInput extends React.Component {
         <div className="input-container__input-field">
           <label>{this.props.label}</label>
           {this.renderHintText()}
-          <MaskedInput
+          <input
             type={this.props.type || 'text'}
             name={this.props.name}
             value={this.props.value}
@@ -77,10 +81,9 @@ class DateInput extends React.Component {
             onChange={this.onTextInputChange}
             onClick={this.onInputClick}
             ref="j_text_input"
-            mask={[/\d/, /\d/,"/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/]}
           />
         </div>
-        <style jsx>{textInputCSS}</style>
+        <style jsx>{TextInputCSS}</style>
       </div>
     )
   }
