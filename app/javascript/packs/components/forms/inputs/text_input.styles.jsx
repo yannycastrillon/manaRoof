@@ -51,7 +51,8 @@ export default css`
   input[type='text'],
   input[type='email'],
   input[type='password'],
-  input[type='number'] {
+  input[type='number'],
+  input[type='date'] {
     padding: 0px;
     position: relative;
     width: 100%;
@@ -72,6 +73,12 @@ export default css`
     height: 100%;
     box-sizing: border-box;
     margin-top: 14px;
+  }
+
+  input[type='date'] {
+    position: absolute;
+    color: rgba(0, 0, 0, 0.3);
+    opacity: 1;
   }
   .baseline {
     bottom: 8px;

@@ -71,7 +71,6 @@ ActiveRecord::Schema.define(version: 2018_09_29_061520) do
     t.date "start_date"
     t.string "phone_number"
     t.string "status"
-    t.bigint "team_id"
     t.string "employable_type"
     t.bigint "employable_id"
     t.datetime "created_at", null: false
@@ -79,7 +78,6 @@ ActiveRecord::Schema.define(version: 2018_09_29_061520) do
     t.boolean "active", default: true
     t.index ["email", "driver_license"], name: "index_employees_on_email_and_driver_license"
     t.index ["employable_type", "employable_id"], name: "index_employees_on_employable_type_and_employable_id"
-    t.index ["team_id"], name: "index_employees_on_team_id"
   end
 
   create_table "managers", force: :cascade do |t|
@@ -152,7 +150,6 @@ ActiveRecord::Schema.define(version: 2018_09_29_061520) do
   end
 
   add_foreign_key "companies", "contacts"
-  add_foreign_key "employees", "teams"
   add_foreign_key "project_team_schedulers", "projects"
   add_foreign_key "project_team_schedulers", "teams"
   add_foreign_key "projects", "companies"

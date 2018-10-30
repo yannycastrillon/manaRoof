@@ -12,7 +12,8 @@ class DateInput extends React.Component {
       moment: moment(),
       isFocused: false,
       isTouched: false,
-      hasValue: false
+      hasValue: false,
+      dob: ''
     }
   }
 
@@ -26,9 +27,12 @@ class DateInput extends React.Component {
 
   onTextInputChange = e => {
     var date = e.target.value
-    console.log(date);
+    console.log("date val: ",date);
+    var x = moment(date).format('MM/DD/YYYY')
+    console.log("moment format: ",x);
     this.setState({
-      hasValue: !!e.target.value.length
+      hasValue: !!e.target.value.length,
+      dob: x
     });
     this.props.onChange(e);
   }
@@ -73,7 +77,7 @@ class DateInput extends React.Component {
           <label>{this.props.label}</label>
           {this.renderHintText()}
           <input
-            type={this.props.type || 'text'}
+            type={this.state.isFocused ? "date" : "text"}
             name={this.props.name}
             value={this.props.value}
             onFocus={this.onInputFocus}

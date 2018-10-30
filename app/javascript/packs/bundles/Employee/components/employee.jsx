@@ -88,16 +88,65 @@ class InnerForm extends React.Component {
             </div>
           </div>
           <div className="input-container">
+            <TextInput
+              label="Driver License"
+              name="driver_license"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              hintText="Enter Driver License"
+            />
+            <div className="employee-form__error-container">
+             {touched.driver_license &&
+               this.renderErrors(errors, 'driver_license').map((e, i) => {
+                 return <p key={i}>{e}</p>
+               })
+             }
+            </div>
+          </div>
+
+          <div className="input-container">
             <DateInput
               label="Date of birth"
               name="date_of_birth"
               onChange={handleChange}
               onBlur={handleBlur}
-              hintText="MM-DD-YYYY"
             />
             <div className="employee-form__error-container">
              {touched.date_of_birth &&
                this.renderErrors(errors, 'date_of_birth').map((e, i) => {
+                 return <p key={i}>{e}</p>
+               })
+             }
+            </div>
+          </div>
+
+          <div className="input-container">
+            <TextInput
+              label="Salary Rate (hours)"
+              name="salary_per_hour"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              hintText="Enter Salary per hour"
+            />
+            <div className="employee-form__error-container">
+             {touched.salary_per_hour &&
+               this.renderErrors(errors, 'salary_per_hour').map((e, i) => {
+                 return <p key={i}>{e}</p>
+               })
+             }
+            </div>
+          </div>
+          <div className="input-container">
+            <TextInput
+              label="Cellphone Number"
+              name="cell_phone"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              hintText="(xxx) xxx-xxxx"
+            />
+            <div className="employee-form__error-container">
+             {touched.cell_phone &&
+               this.renderErrors(errors, 'cell_phone').map((e, i) => {
                  return <p key={i}>{e}</p>
                })
              }
