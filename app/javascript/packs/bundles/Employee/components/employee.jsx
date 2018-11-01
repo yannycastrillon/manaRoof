@@ -5,7 +5,7 @@ import DateInput from '../../../components/forms/inputs/date_input';
 
 // Styles
 import employeeFormStyles from './employee_form.styles';
-import { withFormik } from 'formik';
+import { withFormik, Field } from 'formik';
 import employeeSchema from '../schemas/employee.schema';
 import axios from 'axios';
 
@@ -136,6 +136,7 @@ class InnerForm extends React.Component {
              }
             </div>
           </div>
+
           <div className="input-container">
             <TextInput
               label="Cellphone Number"
@@ -147,6 +148,20 @@ class InnerForm extends React.Component {
             <div className="employee-form__error-container">
              {touched.cell_phone &&
                this.renderErrors(errors, 'cell_phone').map((e, i) => {
+                 return <p key={i}>{e}</p>
+               })
+             }
+            </div>
+          </div>
+
+          <div className="input-container">
+            <Field component="select">
+              <option value='male'>Male</option>
+              <option value='female'>Female</option>
+            </Field>
+            <div className="employee-form__error-container">
+             {touched.gender &&
+               this.renderErrors(errors, 'gender').map((e, i) => {
                  return <p key={i}>{e}</p>
                })
              }
