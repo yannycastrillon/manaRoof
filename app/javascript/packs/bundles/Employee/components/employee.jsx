@@ -2,12 +2,17 @@ import React from 'react';
 // Forms components
 import TextInput from '../../../components/forms/inputs/text_input';
 import DateInput from '../../../components/forms/inputs/date_input';
+import SelectInput from '../../../components/forms/inputs/select_input';
+import Alert from '../../../components/alerts/alert_base';
 
 // Styles
 import employeeFormStyles from './employee_form.styles';
 import { withFormik, Field } from 'formik';
 import employeeSchema from '../schemas/employee.schema';
 import axios from 'axios';
+
+//data
+import states from '../../../components/forms/inputs/dropdown_data';
 
 class InnerForm extends React.Component {
   renderErrors = (errors, field) => {
@@ -26,6 +31,9 @@ class InnerForm extends React.Component {
   };
 
   render() {
+    console.log("STATES",states);
+    const {california} = states
+    const statesName = Object.keys(states)
     const {
       values,
       errors,
@@ -103,7 +111,6 @@ class InnerForm extends React.Component {
              }
             </div>
           </div>
-
           <div className="input-container">
             <DateInput
               label="Date of birth"
@@ -119,10 +126,10 @@ class InnerForm extends React.Component {
              }
             </div>
           </div>
-
           <div className="input-container">
             <TextInput
               label="Salary Rate (hours)"
+              type="number"
               name="salary_per_hour"
               onChange={handleChange}
               onBlur={handleBlur}
@@ -136,7 +143,6 @@ class InnerForm extends React.Component {
              }
             </div>
           </div>
-
           <div className="input-container">
             <TextInput
               label="Cellphone Number"
@@ -153,18 +159,99 @@ class InnerForm extends React.Component {
              }
             </div>
           </div>
-
           <div className="input-container">
-            <Field component="select">
-              <option value='male'>Male</option>
-              <option value='female'>Female</option>
-            </Field>
+            <TextInput
+              label="Phone Number"
+              type="number"
+              name="phone_number"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              hintText="Enter phone number"
+            />
+            <div className="employee-form__error-container">
+             {touched.phone_number &&
+               errors.phone_number && (
+                 <Alert type="error">{errors.phone_number}</Alert>
+               )
+             }
+            </div>
+          </div>
+          <div className="input-container">
+            <TextInput
+              label="Street"
+              name="street"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              hintText="Enter Street Address"
+            />
+            <div className="employee-form__error-container">
+             {touched.street &&
+               errors.street && (
+                 <Alert type="error">{errors.street}</Alert>
+               )
+             }
+            </div>
+          </div>
+          <div className="input-container">
+            <TextInput
+              label="Second Address"
+              name="second_address"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              hintText="Enter Address 2"
+            />
+            <div className="employee-form__error-container">
+             {touched.second_address &&
+               errors.second_address && (
+                 <Alert type="error">{errors.second_address}</Alert>
+               )
+             }
+            </div>
+          </div>
+          <div className="input-container">
+            <SelectInput
+              label="State"
+              name="state"
+              options={statesName}
+              hintText="--Select--"
+            />
+            <div className="employee-form__error-container">
+             {touched.state &&
+               errors.state && (
+                 <Alert type="error">{errors.state}</Alert>
+               )
+             }
+            </div>
+          </div>
+          <div className="input-container">
+            <SelectInput
+              label="City"
+              name="city"
+              options={california.cities}
+              hintText="--Select--"
+            />
+            <div className="employee-form__error-container">
+             {touched.city &&
+               errors.city && (
+                 <Alert type="error">{errors.city}</Alert>
+               )
+             }
+            </div>
+          </div>
+          <div className="input-container">
+            <SelectInput
+              label="Gender"
+              name="gender"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              hintText="--Select--"
+              ref="j_select_input"
+            />
             <div className="employee-form__error-container">
              {touched.gender &&
-               this.renderErrors(errors, 'gender').map((e, i) => {
-                 return <p key={i}>{e}</p>
-               })
-             }
+               errors.gender && (
+                 <Alert type="error">{errors.gender}</Alert>
+               )}
             </div>
           </div>
           <button type="submit" disabled={!isValid} className="r-button">

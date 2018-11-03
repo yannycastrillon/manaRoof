@@ -18,6 +18,7 @@ const schema = values =>
     zipcode: yup.number().test('len', 'Must be a valid zipcode', val => val.toString().length === 5).required('Please enter your zipcode'),
     nationality: yup.string(),
     start_date: yup.date().required("Please enter a valid date starting date").default(() => { return new Date })
-  });
+
+    });
 
 export default schema;
