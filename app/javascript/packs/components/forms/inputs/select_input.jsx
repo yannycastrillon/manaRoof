@@ -14,15 +14,17 @@ class SelectInput extends React.Component {
       isTouched: false,
       hasValue: false,
       selectedOption: null,
-      options: this.mapOptions(props.options)
+      options: []
     }
   }
 
-  mapOptions = options => {
-    return options.map((e) => {
-      return { value: e, label: e }
+  componentWillMount() {
+    console.log("willMountProps", this.props);
+    this.setState({
+      options: this.props.options.map((e) => ({ value: e, label: e.toUpperCase() }))
     })
   }
+
   getClassnames() {
     return classnames('input-container', {
       'is--touched': this.state.isTouched,
@@ -33,7 +35,6 @@ class SelectInput extends React.Component {
 
   handleChange = (selectedOption) => {
     this.setState({ selectedOption });
-    console.log(`Option selected:`, selectedOption);
   }
 
   onInputBlur = e => {
@@ -71,20 +72,32 @@ class SelectInput extends React.Component {
 
   render() {
     const { selectedOption } = this.state;
-    console.log("Options: ",this.state.options);
     return (
       <div className={this.getClassnames()}>
         <div className="input-container__input-field">
           <label>{this.props.label}</label>
           {this.renderHintText()}
           <Select
-              value={selectedOption}
-              onChange={this.handleChange}
-              options={this.state.options}
-              placeholder={this.props.hintText}
-            />
+            labelKey={this.props.label}
+            name={this.props.name}
+            value={selectedOption}
+            onChange={this.props.handleChange}
+            options={this.state.options}
+            placeholder={this.props.hintText}
+          />
         </div>
         <style jsx>{`
+          .input-container__input-field {
+            padding-top: 25px;
+            line-height: 24px;
+            height: 72px;
+            cursor: auto;
+            color: Gray;
+          }
+          label {
+            color: Orange;
+            line-height: 24px;
+          }
         `}</style>
       </div>
     )
@@ -92,7 +105,8 @@ class SelectInput extends React.Component {
 }
 
 SelectInput.propTypes = {
-  label: PropTypes.string.isRequired
+  label: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(PropTypes.string).isRequired
 }
 
 export default SelectInput;

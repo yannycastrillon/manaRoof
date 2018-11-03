@@ -8,7 +8,7 @@ export default css`
     justify-content: space-between;
     align-items: center;
     font-family: 'Graphik Bold';
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.3rem;
   }
   img {

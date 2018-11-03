@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import { alertStyles } from './alert.styles';
+import alertStyles from './alert.styles';
 
 class Alert extends React.Component {
   getAlertClassNames = () => {
@@ -23,7 +23,7 @@ class Alert extends React.Component {
 
   render() {
     return (
-      <div className={this.getAlertClassNames()}>
+      <div className={this.getAlertClassNames()} key={this.props.key}>
         {this.props.children}
         <img src={this.getAlertIcon(this.props.type)}/>
         <style jsx>{alertStyles}</style>
@@ -31,3 +31,5 @@ class Alert extends React.Component {
     )
   }
 }
+
+export default Alert;

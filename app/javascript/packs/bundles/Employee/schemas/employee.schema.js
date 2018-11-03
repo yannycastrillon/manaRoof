@@ -15,7 +15,6 @@ const schema = values =>
     second_address: yup.string(),
     city: yup.string().required('Please select a city'),
     state: yup.string().required('Please select a state'),
-    zipcode: yup.number().test('len', 'Must be a valid zipcode', val => val.toString().length === 5).required('Please enter your zipcode'),
     nationality: yup.string(),
     start_date: yup.date().required("Please enter a valid date starting date").default(() => { return new Date })
 

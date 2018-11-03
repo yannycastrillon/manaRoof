@@ -1,5 +1,6 @@
 const colors = {
   roofRed: "#FF5A5F",
+  roofGreen: "#C5D067",
   tan: "#edeee8",
   black: "#2b2d2e",
   greyHorizontalLine: "#cccccc",

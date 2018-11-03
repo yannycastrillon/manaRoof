@@ -19,12 +19,8 @@ class InnerForm extends React.Component {
     console.log("Errors Employee: ", errors)
     if (errors.hasOwnProperty('inner')) {
       const errorObject = errors.inner
-        .filter(error => {
-          return error.path === field;
-        })
-        .map(errorObject => {
-          return errorObject.errors[0];
-        });
+        .filter(error => error.path === field)
+        .map(errorObject => errorObject.errors[0]);
       return errorObject;
     }
     return [];
@@ -33,7 +29,8 @@ class InnerForm extends React.Component {
   render() {
     console.log("STATES",states);
     const {california} = states
-    const statesName = Object.keys(states)
+    const stateNames = Object.keys(states)
+    const genders = ["male", "female"]
     const {
       values,
       errors,
@@ -57,9 +54,8 @@ class InnerForm extends React.Component {
             />
             <div className="employee-form__error-container">
               {touched.first_name &&
-                this.renderErrors(errors, 'first_name').map((e, i) => (
-                  <p key={i}>{e}</p>
-                ))
+                this.renderErrors(errors, 'first_name')
+                  .map((e, i) => <Alert type="error" key={i}>{e}</Alert>)
               }
             </div>
           </div>
@@ -74,7 +70,7 @@ class InnerForm extends React.Component {
             <div className="employee-form__error-container">
               {touched.last_name &&
                 this.renderErrors(errors, 'last_name').map((e, i) => (
-                  <p key={i}>{e}</p>
+                  <Alert type="error" key={i}>{e}</Alert>
                 ))
               }
             </div>
@@ -89,10 +85,40 @@ class InnerForm extends React.Component {
             />
             <div className="employee-form__error-container">
              {touched.email &&
-               this.renderErrors(errors, 'email').map((e, i) => {
-                 return <p key={i}>{e}</p>
-               })
+               this.renderErrors(errors, 'email')
+                .map((e, i) => <Alert type="error" key={i}>{e}</Alert>)
              }
+            </div>
+          </div>
+          <div className="input-container">
+            <SelectInput
+              label="Gender"
+              name="gender"
+              options={genders}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              hintText="--Select--"
+              ref="j_select_input"
+            />
+            <div className="employee-form__error-container">
+             {touched.gender &&
+               errors.gender && (
+                 <Alert type="error">{errors.gender}</Alert>
+               )}
+            </div>
+          </div>
+          <div className="input-container">
+            <DateInput
+              label="Date of birth"
+              name="date_of_birth"
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            <div className="employee-form__error-container">
+              {touched.date_of_birth &&
+                this.renderErrors(errors, 'date_of_birth')
+                  .map((e, i) => <Alert type="error" key={i}>{e}</Alert>)
+              }
             </div>
           </div>
           <div className="input-container">
@@ -105,24 +131,8 @@ class InnerForm extends React.Component {
             />
             <div className="employee-form__error-container">
              {touched.driver_license &&
-               this.renderErrors(errors, 'driver_license').map((e, i) => {
-                 return <p key={i}>{e}</p>
-               })
-             }
-            </div>
-          </div>
-          <div className="input-container">
-            <DateInput
-              label="Date of birth"
-              name="date_of_birth"
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            <div className="employee-form__error-container">
-             {touched.date_of_birth &&
-               this.renderErrors(errors, 'date_of_birth').map((e, i) => {
-                 return <p key={i}>{e}</p>
-               })
+               this.renderErrors(errors, 'driver_license')
+                .map((e, i) => <Alert type="error" key={i}>{e}</Alert>)
              }
             </div>
           </div>
@@ -137,12 +147,26 @@ class InnerForm extends React.Component {
             />
             <div className="employee-form__error-container">
              {touched.salary_per_hour &&
-               this.renderErrors(errors, 'salary_per_hour').map((e, i) => {
-                 return <p key={i}>{e}</p>
-               })
+               this.renderErrors(errors, 'salary_per_hour')
+                .map((e, i) => <Alert type="error" key={i}>{e}</Alert>)
              }
             </div>
           </div>
+          <div className="input-container">
+            <DateInput
+              label="Start Date"
+              name="start_date"
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            <div className="employee-form__error-container">
+             {touched.start_date &&
+               this.renderErrors(errors, 'start_date')
+                .map((e, i) => <Alert type="error" key={i}>{e}</Alert>)
+             }
+            </div>
+          </div>
+
           <div className="input-container">
             <TextInput
               label="Cellphone Number"
@@ -153,9 +177,8 @@ class InnerForm extends React.Component {
             />
             <div className="employee-form__error-container">
              {touched.cell_phone &&
-               this.renderErrors(errors, 'cell_phone').map((e, i) => {
-                 return <p key={i}>{e}</p>
-               })
+               this.renderErrors(errors, 'cell_phone')
+                .map((e, i) => <Alert type="error" key={i}>{e}</Alert>)
              }
             </div>
           </div>
@@ -212,7 +235,7 @@ class InnerForm extends React.Component {
             <SelectInput
               label="State"
               name="state"
-              options={statesName}
+              options={stateNames}
               hintText="--Select--"
             />
             <div className="employee-form__error-container">
@@ -232,26 +255,25 @@ class InnerForm extends React.Component {
             />
             <div className="employee-form__error-container">
              {touched.city &&
-               errors.city && (
-                 <Alert type="error">{errors.city}</Alert>
-               )
+               this.renderErrors(errors, 'city')
+                .map((e, i) => <Alert type="error" key={i}>{e}</Alert>)
              }
             </div>
           </div>
           <div className="input-container">
-            <SelectInput
-              label="Gender"
-              name="gender"
+            <TextInput
+              label="Zipcode"
+              name="zipcode"
+              type="number"
               onChange={handleChange}
               onBlur={handleBlur}
-              hintText="--Select--"
-              ref="j_select_input"
+              hintText="90028"
             />
             <div className="employee-form__error-container">
-             {touched.gender &&
-               errors.gender && (
-                 <Alert type="error">{errors.gender}</Alert>
-               )}
+             {touched.zipcode &&
+               this.renderErrors(errors, 'zipcode')
+                .map((e, i) => <Alert type="error" key={i}>{e}</Alert>)
+             }
             </div>
           </div>
           <button type="submit" disabled={!isValid} className="r-button">
