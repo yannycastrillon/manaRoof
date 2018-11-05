@@ -1,13 +1,16 @@
 import React from 'react';
+import ReactOnRails from 'react-on-rails';
+
 // Forms components
 import TextInput from '../../../components/forms/inputs/text_input';
 import DateInput from '../../../components/forms/inputs/date_input';
 import SelectInput from '../../../components/forms/inputs/select_input';
 import Alert from '../../../components/alerts/alert_base';
+import Button from '../../../lib/components/buttons/primary/button';
 
 // Styles
 import employeeFormStyles from './employee_form.styles';
-import { withFormik, Field } from 'formik';
+import { withFormik } from 'formik';
 import employeeSchema from '../schemas/employee.schema';
 import axios from 'axios';
 
@@ -38,6 +41,7 @@ class InnerForm extends React.Component {
       handleChange,
       handleBlur,
       handleSubmit,
+      isSubmitting,
       isValid
     } = this.props;
     console.log("props", this.props);
@@ -48,6 +52,7 @@ class InnerForm extends React.Component {
             <TextInput
               label="First Name"
               name="first_name"
+              value="Jhon"
               onChange={handleChange}
               onBlur={handleBlur}
               hintText="Enter your First Name"
@@ -63,6 +68,7 @@ class InnerForm extends React.Component {
             <TextInput
               label="Last Name"
               name="last_name"
+              value="Snow"
               onChange={handleChange}
               onBlur={handleBlur}
               hintText="Enter your Last Name"
@@ -79,6 +85,7 @@ class InnerForm extends React.Component {
             <TextInput
               label="Email"
               name="email"
+              value="jhon.snow@example.com"
               onChange={handleChange}
               onBlur={handleBlur}
               hintText="Enter your Email"
@@ -94,6 +101,7 @@ class InnerForm extends React.Component {
             <SelectInput
               label="Gender"
               name="gender"
+              value={{value: "male", label:"MALE"}}
               options={genders}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -111,6 +119,7 @@ class InnerForm extends React.Component {
             <DateInput
               label="Date of birth"
               name="date_of_birth"
+              value="1987-12-12"
               onChange={handleChange}
               onBlur={handleBlur}
             />
@@ -125,6 +134,7 @@ class InnerForm extends React.Component {
             <TextInput
               label="Driver License"
               name="driver_license"
+              value="Driver_123"
               onChange={handleChange}
               onBlur={handleBlur}
               hintText="Enter Driver License"
@@ -140,6 +150,7 @@ class InnerForm extends React.Component {
             <TextInput
               label="Salary Rate (hours)"
               type="number"
+              value="35"
               name="salary_per_hour"
               onChange={handleChange}
               onBlur={handleBlur}
@@ -156,6 +167,7 @@ class InnerForm extends React.Component {
             <DateInput
               label="Start Date"
               name="start_date"
+              value="2018-11-11"
               onChange={handleChange}
               onBlur={handleBlur}
             />
@@ -166,14 +178,14 @@ class InnerForm extends React.Component {
              }
             </div>
           </div>
-
           <div className="input-container">
             <TextInput
               label="Cellphone Number"
               name="cell_phone"
+              value="(323)561-5903"
               onChange={handleChange}
               onBlur={handleBlur}
-              hintText="(xxx) xxx-xxxx"
+              hintText="(xxx)xxx-xxxx"
             />
             <div className="employee-form__error-container">
              {touched.cell_phone &&
@@ -203,6 +215,7 @@ class InnerForm extends React.Component {
             <TextInput
               label="Street"
               name="street"
+              value="7045 Test Riverside"
               onChange={handleChange}
               onBlur={handleBlur}
               hintText="Enter Street Address"
@@ -219,6 +232,7 @@ class InnerForm extends React.Component {
             <TextInput
               label="Second Address"
               name="second_address"
+              value="Apt 201"
               onChange={handleChange}
               onBlur={handleBlur}
               hintText="Enter Address 2"
@@ -235,6 +249,9 @@ class InnerForm extends React.Component {
             <SelectInput
               label="State"
               name="state"
+              value={{value: "california", label:"CALIFORNIA"}}
+              onChange={handleChange}
+              onBlur={handleBlur}
               options={stateNames}
               hintText="--Select--"
             />
@@ -250,6 +267,9 @@ class InnerForm extends React.Component {
             <SelectInput
               label="City"
               name="city"
+              value={{value: "riverside", label:"RIVERSIDE"}}
+              onChange={handleChange}
+              onBlur={handleBlur}
               options={california.cities}
               hintText="--Select--"
             />
@@ -264,6 +284,7 @@ class InnerForm extends React.Component {
             <TextInput
               label="Zipcode"
               name="zipcode"
+              value="90029"
               type="number"
               onChange={handleChange}
               onBlur={handleBlur}
@@ -276,9 +297,12 @@ class InnerForm extends React.Component {
              }
             </div>
           </div>
-          <button type="submit" disabled={!isValid} className="r-button">
-            Create Employee
-          </button>
+          <Button
+            label="New Employee"
+            type="submit"
+            disabled={!isValid}
+            action={handleSubmit}
+          />
           <style jsx>{employeeFormStyles}</style>
         </div>
       </form>
@@ -295,14 +319,14 @@ const Employee = withFormik({
     values,
     { props, setSubmitting, setErrors, resetForm, setValues }
   ) => {
-    axios.defaults.headers.common['Accept'] = 'application/json';
-    axios.post('/employees', values)
+    const headers = ReactOnRails.authenticityHeaders({'Accept':'application/json'});
+    axios.post('/employees', values, headers)
       .then(response => {
         console.log("SUCCESSS YANNYYY POST EMPLOYEE")
       })
       .catch(error => {
         if (error.response.data.errors.length > 0) {
-          error.resposne.data.errors.forEach(function(serverSideError) {
+          error.response.data.errors.forEach(function(serverSideError) {
             setErrors({ serverSide: serverSideError });
           });
         }
