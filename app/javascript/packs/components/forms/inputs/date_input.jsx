@@ -10,9 +10,9 @@ class DateInput extends React.Component {
     super(props)
     this.state = {
       moment: moment(),
-      isFocused: false,
-      isTouched: false,
-      hasValue: false,
+      isFocused: true,
+      isTouched: true,
+      hasValue: true,
       dob: ''
     }
   }

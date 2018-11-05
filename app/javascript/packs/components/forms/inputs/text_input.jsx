@@ -8,9 +8,9 @@ class TextInput extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isFocused: false,
-      isTouched: false,
-      hasValue: false
+      isFocused: true,
+      isTouched: true,
+      hasValue: true
     }
   }
 

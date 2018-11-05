@@ -10,10 +10,10 @@ class SelectInput extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isFocused: false,
-      isTouched: false,
-      hasValue: false,
-      selectedOption: null,
+      isFocused: true,
+      isTouched: true,
+      hasValue: true,
+      selectedOption: this.props.value,
       options: []
     }
   }
@@ -34,10 +34,13 @@ class SelectInput extends React.Component {
   }
 
   handleChange = (selectedOption) => {
-    this.setState({ selectedOption });
+    console.log("Select OnChange: ", selectedOption);
+    this.setState({ selectedOption, hasValue: !!selectedOption });
+    this.props.onChange;
   }
 
-  onInputBlur = e => {
+  handleBlur = e => {
+    console.log("inputBlur: ", e);
     this.setState({ isFocused: false })
     this.props.onBlur(e);
   }
@@ -78,10 +81,12 @@ class SelectInput extends React.Component {
           <label>{this.props.label}</label>
           {this.renderHintText()}
           <Select
+            autoBlur
             labelKey={this.props.label}
             name={this.props.name}
             value={selectedOption}
-            onChange={this.props.handleChange}
+            onChange={this.handleChange}
+            onBlur={this.handleBlur}
             options={this.state.options}
             placeholder={this.props.hintText}
           />
