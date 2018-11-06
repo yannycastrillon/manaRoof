@@ -9,6 +9,7 @@ const colors = {
   blackDisabled: "rgba(43, 45, 46, 0.25)",
   white: "#ffffff",
   white25: "rgba(255,255,255,0.25)",
+  white85: "rgba(255,255,255,0.85)",
   blackLite: "rgba(43, 45, 46, 0.10)",
   infoBlue: "#5B71B8",
   yellow: "#F4C10F",

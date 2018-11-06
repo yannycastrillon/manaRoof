@@ -21,11 +21,9 @@ class PrimaryButton extends React.Component {
   }
 
   renderButton() {
-    if (this.props.disabled) {
-      return(<ButtonDisable />)
-    }
+    if (this.props.disabled) return <ButtonDisable />
     return (
-      <div>
+      <div className="button__container">
         <button
           className={this.getClassnames()}
           type={this.props.type}

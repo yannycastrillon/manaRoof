@@ -6,7 +6,7 @@ class EmployeeContainer extends React.Component {
   render() {
     return (
       <SingleCardLayout
-        cardTitle="Employees"
+        title="Employees"
         body={<Employee {...this.props} />}
       />
     )

@@ -7,5 +7,6 @@ export default css`
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    background: #f5f5f5
   }
 `;

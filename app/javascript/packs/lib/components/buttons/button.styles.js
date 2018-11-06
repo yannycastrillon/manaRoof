@@ -19,6 +19,10 @@ export const baseButton = css`
     display: flex;
     justify-content: center;
   }
+  .button__container {
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 export const primaryButton = css`

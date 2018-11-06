@@ -7,10 +7,10 @@ const CardHeader = ({title, image}) => (
     <h4 className="r-subheader2">{title}</h4>
     <style jsx>{`
       .card-header {
-        margin-top: 4.5rem;
-        margin-bottom: 2rem;
         padding: 1.5rem;
-        height: 100%;
+        display: flex;
+        justify-content: center;
+        background: ${Colors.red}
       }
       .card-header img {
         max-width: 10rem;
@@ -18,6 +18,11 @@ const CardHeader = ({title, image}) => (
       h4 {
         margin: 0;
         color: ${Colors.red};
+      }
+      .r-subheader2 {
+        font-family: 'Graphik Bold';
+        font-size: 50px;
+        color: ${Colors.white85};
       }
     `}</style>
   </div>
