@@ -1,16 +1,19 @@
 import React from 'react';
 import classnames from 'classnames';
-import textInputCSS, { hintTextCSS } from './text_input.styles';
+import moment from 'moment';
+import TextInputCSS, { hintTextCSS } from './text_input.styles';
 
 import PropTypes from 'prop-types';
 
-class TextInput extends React.Component {
+class DateInput extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      moment: moment(),
       isFocused: true,
       isTouched: true,
-      hasValue: true
+      hasValue: true,
+      dob: ''
     }
   }
 
@@ -23,7 +26,14 @@ class TextInput extends React.Component {
   }
 
   onTextInputChange = e => {
-    this.setState({ hasValue: !!e.target.value.length });
+    var date = e.target.value
+    console.log("date val: ",date);
+    var x = moment(date).format('MM/DD/YYYY')
+    console.log("moment format: ",x);
+    this.setState({
+      hasValue: !!e.target.value.length,
+      dob: x
+    });
     this.props.onChange(e);
   }
 
@@ -34,12 +44,6 @@ class TextInput extends React.Component {
 
   onInputFocus = e => {
     this.setState({ isTouched: true, isFocused: true });
-  }
-
-  onInputClick = () => {
-    if (this.props.onUpdateView) {
-      this.props.onUpdateView();
-    }
   }
 
   renderHintText() {
@@ -60,7 +64,7 @@ class TextInput extends React.Component {
         <div>
           <hr aria-hidden="true" className="baseline" />
           <hr aria-hidden="true" className="scored" />
-          <style jsx>{textInputCSS}</style>
+          <style jsx>{TextInputCSS}</style>
         </div>
       );
     }
@@ -73,7 +77,7 @@ class TextInput extends React.Component {
           <label>{this.props.label}</label>
           {this.renderHintText()}
           <input
-            type={this.props.type || 'text'}
+            type={this.state.isFocused ? "date" : "text"}
             name={this.props.name}
             value={this.props.value}
             onFocus={this.onInputFocus}
@@ -83,14 +87,14 @@ class TextInput extends React.Component {
             ref="j_text_input"
           />
         </div>
-        <style jsx>{textInputCSS}</style>
+        <style jsx>{TextInputCSS}</style>
       </div>
-    );
+    )
   }
 }
 
-TextInput.propTypes = {
+DateInput.propTypes = {
   label: PropTypes.string.isRequired
 }
 
-export default TextInput;
+export default DateInput;

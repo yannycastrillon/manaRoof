@@ -17,7 +17,7 @@ const config = {
 
   resolve: {
     enforceModuleExtension: false,
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
     alias: {
       images: pathLib.resolve(__dirname, './app/javascript/images')
     }
@@ -35,6 +35,27 @@ const config = {
             shim: 'es5-shim/es5-shim',
             sham: 'es5-shim/es5-sham'
           }
+        }
+      },
+      {
+        test: /\.(jpg|jpeg|png|svg)(\?.*)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: "[name][md5:hash].[ext]",
+              outputPath: "/",
+              publicPath: "/assets/"
+            }
+          }
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: {
+          loader: "style-loader",
+          loader: "css-loader",
+          loader: "sass-loader"  
         }
       },
       {

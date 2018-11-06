@@ -1,4 +1,4 @@
-import css from 'style-jsx/css';
+import css from 'styled-jsx/css';
 
 export default css`
   .r-card {
@@ -7,5 +7,6 @@ export default css`
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    background: #f5f5f5
   }
 `;

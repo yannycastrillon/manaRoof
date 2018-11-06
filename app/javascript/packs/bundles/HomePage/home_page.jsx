@@ -1,11 +1,11 @@
 import React from 'react';
-import Footer from './components/footer/main_footer.jsx';
-import Menu from './components/navbar/main_menu.jsx';
+import Footer from './components/footer/main_footer';
+import Menu from './components/navbar/main_menu';
 
 // Sections
-import PageHeader from './sections/page_header.jsx';
-import PageSection from './sections/page_section.jsx';
-import HomeTeamSection from './sections/home_team_section.jsx';
+import PageHeader from './sections/page_header';
+import PageSection from './sections/page_section';
+import HomeTeamSection from './sections/home_team_section';
 
 //Images
 import HomePageTeam from 'images/home-page/home-team.png';
