@@ -30,7 +30,6 @@ class InnerForm extends React.Component {
   };
 
   render() {
-    console.log("STATES",states);
     const {california} = states
     const stateNames = Object.keys(states)
     const genders = ["male", "female"]

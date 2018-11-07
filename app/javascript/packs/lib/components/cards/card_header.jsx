@@ -1,10 +1,11 @@
 import React from 'react';
 import Colors from '../../theme/colors';
 
-const CardHeader = ({title, image}) => (
+const CardHeader = ({title, image, onViewId}) => (
   <div className="card-header">
     <img src={image} />
     <h4 className="r-subheader2">{title}</h4>
+    <button onClick={this.handleClick} />
     <style jsx>{`
       .card-header {
         padding: 1.5rem;

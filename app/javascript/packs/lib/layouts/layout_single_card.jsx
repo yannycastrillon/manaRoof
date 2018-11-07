@@ -12,7 +12,7 @@ const Layout = props => (
   <BaseLayout>
     <div className="layout-single-card">
       <Card>
-        <CardHeader title={props.title} image={props.image}/>
+        <CardHeader title={props.title} image={props.image} onViewId={props.onViewId}/>
         <CardContent>
           {props.body}
         </CardContent>
