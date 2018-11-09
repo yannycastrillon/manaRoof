@@ -28,10 +28,8 @@ class InnerForm extends React.Component {
   };
 
   render() {
-    const options = [
-      {value:"Active", label:"active"},
-      {value:"Inactive", label:"inactive"},
-    ]
+    const StatusOptions = ["active", "inactive"]
+
     const {
       values,
       errors,
@@ -83,7 +81,7 @@ class InnerForm extends React.Component {
               name="status"
               onBlur={handleBlur}
               onChange={handleChange}
-              options={options}
+              options={StatusOptions}
               hintText="--Select--"
             />
             <div className="project-form__error-container">
@@ -124,7 +122,7 @@ class InnerForm extends React.Component {
             </div>
           </div>
           <Button
-            lable="Create new project"
+            label="Create new project"
             type="submit"
             disabled={!isValid}
             action={handleSubmit}
