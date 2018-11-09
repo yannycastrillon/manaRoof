@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 // Components
 import HomePage from '../bundles/HomePage/home_page';
 import EmployeeContainer from '../bundles/Employee/components/employee_container';
+import ProjectContainer from '../bundles/Project/components/project_container';
 
 class App extends React.Component {
 
@@ -22,7 +23,13 @@ class App extends React.Component {
             )}
           />
           <Route path="/joint_us" exact render={props => ( <h1>Join Us Page</h1>)} />
-          <Route path="/projects" exact render={props => ( <h1>Projects Page</h1>)} />
+          <Route
+            path="/projects"
+            exact
+            render={props => (
+              <ProjectContainer router={props} {...props} />
+            )}
+          />
         </div>
       </Router>
     )
