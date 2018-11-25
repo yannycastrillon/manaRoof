@@ -5,8 +5,8 @@ const schema = values =>
     name: yup.string().required("Please enter a project name"),
     price: yup.number(),
     status: yup.string(),
-    start_date: yup.date().isRequired("Please enter a valid starting date").default(() => { return new Date }),
-    end_date: yup.date()
+    start_date: yup.date().required("Please enter a valid starting date").default(() => { return new Date }),
+    end_date: yup.date().default(() => { return new Date })
   })
 
 export default schema;
