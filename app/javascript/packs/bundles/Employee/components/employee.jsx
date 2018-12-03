@@ -319,8 +319,11 @@ const Employee = withFormik({
     values,
     { props, setSubmitting, setErrors, resetForm, setValues }
   ) => {
-    const headers = ReactOnRails.authenticityHeaders({'Accept':'application/json'});
-    axios.post('/employees', values, headers)
+    const csrfToken = document.querySelector("meta[name=csrf-token]").content
+    axios.defaults.headers.common['Accept'] = 'application/json';
+    axios.defaults.headers.common['X-CSRF-Token'] = csrfToken
+    // const headers = ReactOnRails.authenticityHeaders({'Accept':'application/json'});
+    axios.post('v1/employees', values)
       .then(response => {
         console.log("SUCCESSS YANNYYY POST EMPLOYEE")
       })
