@@ -20,10 +20,10 @@ class HomePage extends React.Component {
       <div className="home-page">
         <Menu isUserlogIn={this.props.isUserlogIn} />
         <PageHeader>
-        <HomeTeamSection
-          title="Taking care of our Workers."
-          subtitle="ManaRoof brings quality and team opportunities to our workforce."
-          team_image_url={HomePageTeam} />
+          <HomeTeamSection
+            title="Taking care of our Workers."
+            subtitle="ManaRoof brings quality and team opportunities to our workforce."
+            team_image_url={HomePageTeam}/>
         </PageHeader>
         <PageSection />
         <PageSection />

@@ -6,7 +6,7 @@ import TextInput from '../../../components/forms/inputs/text_input';
 import DateInput from '../../../components/forms/inputs/date_input';
 import SelectInput from '../../../components/forms/inputs/select_input';
 import Alert from '../../../components/alerts/alert_base';
-import Button from '../../../lib/components/buttons/primary/button';
+import Button from '../../../lib/components/buttons/secondary/button';
 
 // Styles
 import employeeFormStyles from './employee_form.styles';
