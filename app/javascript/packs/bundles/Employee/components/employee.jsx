@@ -19,7 +19,6 @@ import states from '../../../components/forms/inputs/dropdown_data';
 
 class InnerForm extends React.Component {
   renderErrors = (errors, field) => {
-    console.log("Errors Employee: ", errors)
     if (errors.hasOwnProperty('inner')) {
       const errorObject = errors.inner
         .filter(error => error.path === field)
@@ -30,7 +29,6 @@ class InnerForm extends React.Component {
   };
 
   render() {
-    console.log("STATES",states);
     const {california} = states
     const stateNames = Object.keys(states)
     const genders = ["male", "female"]
@@ -44,7 +42,6 @@ class InnerForm extends React.Component {
       isSubmitting,
       isValid
     } = this.props;
-    console.log("props", this.props);
     return (
       <form onSubmit={handleSubmit} autoComplete="off">
         <div className="employee-form">
@@ -85,7 +82,7 @@ class InnerForm extends React.Component {
             <TextInput
               label="Email"
               name="email"
-              value="jhon.snow@example.com"
+              value="jhon.snow123@example.com"
               onChange={handleChange}
               onBlur={handleBlur}
               hintText="Enter your Email"
@@ -134,7 +131,7 @@ class InnerForm extends React.Component {
             <TextInput
               label="Driver License"
               name="driver_license"
-              value="Driver_123"
+              value="Driver_123456"
               onChange={handleChange}
               onBlur={handleBlur}
               hintText="Enter Driver License"
@@ -301,7 +298,6 @@ class InnerForm extends React.Component {
             label="New Employee"
             type="submit"
             disabled={!isValid}
-            action={handleSubmit}
           />
           <style jsx>{employeeFormStyles}</style>
         </div>
@@ -319,10 +315,16 @@ const Employee = withFormik({
     values,
     { props, setSubmitting, setErrors, resetForm, setValues }
   ) => {
-    const headers = ReactOnRails.authenticityHeaders({'Accept':'application/json'});
-    axios.post('/employees', values, headers)
+    const csrfToken = document.querySelector("meta[name=csrf-token]").content
+    axios.defaults.headers.common['Accept'] = 'application/json';
+    axios.defaults.headers.common['X-CSRF-Token'] = csrfToken
+    console.log("I am submitting... Values:", values);
+    // const headers = ReactOnRails.authenticityHeaders({'Accept':'application/json'});
+    axios.post('/v1/employees', values)
       .then(response => {
-        console.log("SUCCESSS YANNYYY POST EMPLOYEE")
+        console.log("SUCCESSS YANNYYY POST EMPLOYEE");
+        // window.location = props.successPath;
+        console.log("Props after SUCCESSS submitting:", props);
       })
       .catch(error => {
         if (error.response.data.errors.length > 0) {

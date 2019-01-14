@@ -68,8 +68,6 @@ class EmployeesController < ApplicationController
                                      :nationality,
                                      :start_date,
                                      :phone_number,
-                                     :status,
-                                     :employable_type,
-                                     :employable_id)
+                                     :status)
   end
 end

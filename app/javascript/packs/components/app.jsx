@@ -19,10 +19,10 @@ class App extends React.Component {
             path="/employees"
             exact
             render={props => (
-              <EmployeeContainer router={props} {...props} />
+              <EmployeeContainer router={props} {...props}/>
             )}
           />
-          <Route path="/joint_us" exact render={props => ( <h1>Join Us Page</h1>)} />
+          <Route path="/join_us" exact render={props => ( <h1>Join Us Page</h1>)} />
           <Route
             path="/projects"
             exact
