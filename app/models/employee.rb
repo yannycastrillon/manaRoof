@@ -1,13 +1,14 @@
 class Employee < ApplicationRecord
+  after_initialize :default_title, unless: Proc.new { |emp| emp.employable.present? }
+
   has_many :employee_teams, inverse_of: :employee
   has_many :teams, through: :employee_teams
-  belongs_to :employable, polymorphic: true
+  belongs_to :employable, polymorphic: true, dependent: :destroy
   accepts_nested_attributes_for :employee_teams, :teams
 
   validates :email, uniqueness: true
   validates :driver_license, uniqueness: true
 
-  before_save :default_title
 
   scope :actives, -> {
     self.where(active: true)
@@ -27,7 +28,6 @@ class Employee < ApplicationRecord
   end
 
   def default_title
-    binding.pry
-    self.employable ||= Worker.create
+    self.employable = Worker.create
   end
 end
