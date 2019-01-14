@@ -104,7 +104,7 @@ RSpec.describe TeamsController, type: :request do
 
   describe '#add_employee' do
     let(:team) { create(:team) }
-    let(:employee) { create(:employee, :as_worker) }
+    let(:employee) { create(:employee) }
 
     context "when team and employee exists" do
       it "must add employee to the team" do
@@ -134,7 +134,7 @@ RSpec.describe TeamsController, type: :request do
 
   describe '#remove_employee' do
     let(:team) { create(:team) }
-    let(:employee) { create(:employee, :as_worker) }
+    let(:employee) { create(:employee) }
 
     context "when team and employee exists" do
       it "must remove employee from the team" do

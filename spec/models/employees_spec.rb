@@ -2,13 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Employee, type: :model do
   it "has a valid factory employee" do
-    expect(create(:employee, :as_worker)).to be_valid
+    expect(create(:employee)).to be_valid
     expect(create(:employee, :as_manager)).to be_valid
   end
-  let(:worker) { create(:worker) }
   let(:manager) { create(:manager) }
 
-  let(:employee) { create(:employee, :as_worker) }
+  let(:employee) { create(:employee) }
 
   describe "ActiveModel Validations" do
     it "must have an unique email" do
