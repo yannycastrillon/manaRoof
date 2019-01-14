@@ -10,11 +10,13 @@ class EmployeesController < ApplicationController
   end
 
   def create
-    new_employee = Employee.new(employee_params)
-    if new_employee.save
-      render json: new_employee, status: :created
-    else
-      render json: new_employee.errors, status: :unprocessable_entity
+    Employee.transaction do
+      new_employee = Employee.new(employee_params)
+      if new_employee.save!
+        render json: new_employee, status: :created
+      else
+        render json: new_employee.errors, status: :unprocessable_entity
+      end
     end
   end
 
