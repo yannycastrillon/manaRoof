@@ -7,6 +7,8 @@ import DateInput from '../../../components/forms/inputs/date_input';
 import SelectInput from '../../../components/forms/inputs/select_input';
 import Alert from '../../../components/alerts/alert_base';
 import Button from '../../../lib/components/buttons/secondary/button';
+import RadioGroup from '../../../components/forms/inputs/radio-input/radio_group';
+import RadioInput from '../../../components/forms/inputs/radio-input/radio_input';
 
 // Styles
 import employeeFormStyles from './employee_form.styles';
@@ -28,9 +30,21 @@ class InnerForm extends React.Component {
     }
     return [];
   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      employeeType: "worker"
+    }
+  }
+
+  handleEmployeeTypeChange = (event) => {
+    console.log(event);
+    this.setState({
+      employeeType: event.target.value
+    })
+  }
 
   render() {
-    console.log("STATES",states);
     const {california} = states
     const stateNames = Object.keys(states)
     const genders = ["male", "female"]
@@ -44,7 +58,6 @@ class InnerForm extends React.Component {
       isSubmitting,
       isValid
     } = this.props;
-    console.log("props", this.props);
     return (
       <form onSubmit={handleSubmit} autoComplete="off">
         <div className="employee-form">
@@ -297,6 +310,16 @@ class InnerForm extends React.Component {
              }
             </div>
           </div>
+          <div className="input-container">
+            <RadioGroup
+              label="Employee Type"
+              name="employeeType"
+              value={this.state.employeeType}
+              onChange={this.handleEmployeeTypeChange}>
+              <RadioInput value="worker" label="Worker"/>
+              <RadioInput value="manager" label="Manager"/>
+            </RadioGroup>
+          </div>
           <Button
             label="New Employee"
             type="submit"
@@ -325,7 +348,7 @@ const Employee = withFormik({
     // const headers = ReactOnRails.authenticityHeaders({'Accept':'application/json'});
     axios.post('v1/employees', values)
       .then(response => {
-        console.log("SUCCESSS YANNYYY POST EMPLOYEE")
+        console.log("SUCCESSS YANNYYY POST EMPLOYEE");
       })
       .catch(error => {
         if (error.response.data.errors.length > 0) {
