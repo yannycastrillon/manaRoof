@@ -22,14 +22,20 @@ export default css`
   .employee-form__alert_container:last-of-type {
     margin-bottom: 0;
   }
+  .action-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   p {
     font-family: 'Graphik Bold';
     font-size: 12px;
     color: ${Colors.warningOrange};
     text-align: left;
   }
-  .employee-form button {
+  .action-container button {
     width: 100%;
+    margin: 0 0.5rem;
   }
   .employee-form img {
     width: 100%;
