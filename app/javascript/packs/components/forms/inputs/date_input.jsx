@@ -9,10 +9,9 @@ class DateInput extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      moment: moment(),
       isFocused: true,
       isTouched: true,
-      hasValue: true,
+      hasValue: false,
       dob: ''
     }
   }
@@ -26,19 +25,14 @@ class DateInput extends React.Component {
   }
 
   onTextInputChange = e => {
-    var date = e.target.value
-    console.log("date val: ",date);
-    var x = moment(date).format('MM/DD/YYYY')
-    console.log("moment format: ",x);
-    this.setState({
-      hasValue: !!e.target.value.length,
-      dob: x
-    });
+    const date = e.target.value;
+    const dob = moment(date).format('MM/DD/YYYY');
+    this.setState({ dob, hasValue: !!date.length });
     this.props.onChange(e);
   }
 
   onInputBlur = e => {
-    this.setState({ isFocused: false })
+    this.setState({ isFocused: false });
     this.props.onBlur(e);
   }
 
@@ -84,7 +78,7 @@ class DateInput extends React.Component {
             onBlur={this.onInputBlur}
             onChange={this.onTextInputChange}
             onClick={this.onInputClick}
-            ref="j_text_input"
+            ref="j_date_input"
           />
         </div>
         <style jsx>{TextInputCSS}</style>
