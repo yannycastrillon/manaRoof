@@ -5,9 +5,6 @@ class Employee < ApplicationRecord
   accepts_nested_attributes_for :employee_teams, :teams
 
   validates :email, uniqueness: true
-  validates :driver_license, uniqueness: true
-
-  # before_save :default_title
 
   scope :actives, -> {
     self.where(active: true)
@@ -25,8 +22,4 @@ class Employee < ApplicationRecord
   def status_name
     STATUSES[status]
   end
-
-  # def default_title
-  #   self.employable ||= Worker.create
-  # end
 end

@@ -1,9 +1,10 @@
 module ServiceEmployee
   class << self
     def create(params)
-      employee_class = params[:worker] ? Worker : Manager
-      type_employee = employee_class.create
-      type_employee.employee.new(params)
+      employable_class = params[:employable_type].capitalize.constantize
+      employable_type = employable_class.create
+      my_params = params.to_h.except(:employable_type)
+      employable_type.create_employee(my_params)
     end
   end
 end

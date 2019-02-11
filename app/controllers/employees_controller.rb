@@ -11,7 +11,7 @@ class EmployeesController < ApplicationController
 
   def create
     new_employee = ServiceEmployee.create(employee_params)
-    if new_employee.save
+    if new_employee
       render json: new_employee, status: :created
     else
       render json: new_employee.errors, status: :unprocessable_entity
@@ -69,6 +69,6 @@ class EmployeesController < ApplicationController
                                      :start_date,
                                      :phone_number,
                                      :status,
-                                     :worker)
+                                     :employable_type)
   end
 end
