@@ -10,7 +10,7 @@ class TextInput extends React.Component {
     this.state = {
       isFocused: true,
       isTouched: true,
-      hasValue: true
+      hasValue: false
     }
   }
 
@@ -75,7 +75,6 @@ class TextInput extends React.Component {
           <input
             type={this.props.type || 'text'}
             name={this.props.name}
-            value={this.props.value}
             onFocus={this.onInputFocus}
             onBlur={this.onInputBlur}
             onChange={this.onTextInputChange}

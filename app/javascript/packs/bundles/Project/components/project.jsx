@@ -144,7 +144,6 @@ const Project = withFormik({
     { props, setSubmitting, setErrors, resetForm, setValues }
   ) => {
     const headers = ReactOnRails.authenticityHeaders({'Accept':'application/json'});
-    console.log("POST Project creation");
   }
 
 })(InnerForm)

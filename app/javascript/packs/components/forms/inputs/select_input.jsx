@@ -1,5 +1,4 @@
 import React from 'react';
-import Select from 'react-select';
 import classnames from 'classnames';
 import moment from 'moment';
 import TextInputCSS, { hintTextCSS } from './text_input.styles';
@@ -13,15 +12,13 @@ class SelectInput extends React.Component {
       isFocused: true,
       isTouched: true,
       hasValue: true,
-      selectedOption: this.props.value,
       options: []
     }
   }
 
   componentWillMount() {
-    console.log("willMountProps", this.props);
     this.setState({
-      options: this.props.options.map((e) => ({ value: e, label: e.toUpperCase() }))
+      options: this.props.options.map(e => ({ value: e, label: e.toUpperCase() }))
     })
   }
 
@@ -33,14 +30,7 @@ class SelectInput extends React.Component {
     })
   }
 
-  handleChange = (selectedOption) => {
-    console.log("Select OnChange: ", selectedOption);
-    this.setState({ selectedOption, hasValue: !!selectedOption });
-    this.props.onChange;
-  }
-
   handleBlur = e => {
-    console.log("inputBlur: ", e);
     this.setState({ isFocused: false })
     this.props.onBlur(e);
   }
@@ -73,23 +63,34 @@ class SelectInput extends React.Component {
     }
   };
 
+  renderOptions = () => {
+    const { hintText } = this.props;
+    let optionElements = this.state.options.map(option => {
+      return <option key={option.value} value={option.value}>{option.label}</option>
+    })
+    if (hintText){
+      const defaultElement =
+        <option key={hintText.split(" ").pop()} value="">{hintText}</option>;
+      optionElements.unshift(defaultElement);
+    }
+    return optionElements;
+  }
+
   render() {
-    const { selectedOption } = this.state;
     return (
       <div className={this.getClassnames()}>
         <div className="input-container__input-field">
           <label>{this.props.label}</label>
           {this.renderHintText()}
-          <Select
-            autoBlur
-            labelKey={this.props.label}
-            name={this.props.name}
-            value={selectedOption}
-            onChange={this.handleChange}
-            onBlur={this.handleBlur}
-            options={this.state.options}
-            placeholder={this.props.hintText}
-          />
+          <div>
+            <select
+              name={this.props.name}
+              value={this.props.value}
+              onChange={this.props.onChange}
+              onBlur={this.props.onBlur}>
+            { this.renderOptions() }
+            </select>
+          </div>
         </div>
         <style jsx>{`
           .input-container__input-field {
@@ -111,7 +112,7 @@ class SelectInput extends React.Component {
 
 SelectInput.propTypes = {
   label: PropTypes.string.isRequired,
-  options: PropTypes.arrayOf(PropTypes.string).isRequired
+
 }
 
 export default SelectInput;
