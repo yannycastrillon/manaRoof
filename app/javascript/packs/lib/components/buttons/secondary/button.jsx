@@ -1,6 +1,8 @@
 import React from 'react';
 import { baseButton, secondaryButton } from '../button.styles';
 
+import PropTypes from 'prop-types';
+
 class SecondaryButton extends React.Component {
   onButtonClick = () => {
     if (this.props.action) {
@@ -11,7 +13,7 @@ class SecondaryButton extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.onButtonClick} className="button">
+        <button className="button" type={this.props.type} onClick={this.onButtonClick} >
           {this.props.label}
         </button>
         <style jsx>{baseButton}</style>
@@ -19,6 +21,10 @@ class SecondaryButton extends React.Component {
       </div>
     )
   }
+}
+
+SecondaryButton.propTypes = {
+  type: PropTypes.string.isRequired
 }
 
 export default SecondaryButton;
