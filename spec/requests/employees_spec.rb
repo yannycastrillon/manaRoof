@@ -38,7 +38,7 @@ RSpec.describe EmployeesController, type: :request do
   end
 
   describe "post #create" do
-    let(:worker)  { build(:employee, :as_worker) }
+    let(:worker)  { build(:employee) }
     let(:manager) { build(:employee, :as_manager) }
 
     context 'when user is login' do
@@ -113,7 +113,7 @@ RSpec.describe EmployeesController, type: :request do
   end
 
   describe 'Delete #destroy' do
-    let(:employee) { create(:employee, :as_worker) }
+    let(:employee) { create(:employee) }
     context "When user is login" do
       it "must inactivate employee" do
         delete employee_path(id: employee.id)

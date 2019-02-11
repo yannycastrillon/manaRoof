@@ -7,6 +7,7 @@ import DateInput from '../../../components/forms/inputs/date_input';
 import SelectInput from '../../../components/forms/inputs/select_input';
 import Alert from '../../../components/alerts/alert_base';
 import Button from '../../../lib/components/buttons/primary/button';
+
 import ResetButton from '../../../lib/components/buttons/secondary/button';
 import RadioGroup from '../../../components/forms/inputs/radio-input/radio_group';
 import RadioInput from '../../../components/forms/inputs/radio-input/radio_input';
@@ -351,8 +352,9 @@ const Employee = withFormik({
     const csrfToken = document.querySelector("meta[name=csrf-token]").content
     axios.defaults.headers.common['Accept'] = 'application/json';
     axios.defaults.headers.common['X-CSRF-Token'] = csrfToken
+    console.log("I am submitting... Values:", values);
     // const headers = ReactOnRails.authenticityHeaders({'Accept':'application/json'});
-    axios.post('v1/employees', values)
+    axios.post('/v1/employees', values)
       .then(response => {
         console.log("SUCCESSS YANNYYY POST EMPLOYEE");
       })

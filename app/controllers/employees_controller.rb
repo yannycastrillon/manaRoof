@@ -70,5 +70,4 @@ class EmployeesController < ApplicationController
                                      :phone_number,
                                      :status,
                                      :employable_type)
-  end
 end
