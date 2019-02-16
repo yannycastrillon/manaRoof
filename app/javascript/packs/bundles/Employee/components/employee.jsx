@@ -309,7 +309,6 @@ class InnerForm extends React.Component {
               label="New Employee"
               type="submit"
               disabled={!isValid}
-              action={handleSubmit}
             />
           </div>
           <style jsx>{employeeFormStyles}</style>
