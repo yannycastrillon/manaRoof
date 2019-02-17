@@ -6,7 +6,7 @@ class ProjectContainer extends React.Component {
   render() {
     return(
       <SingleCardLayout
-        title="Projects"
+        title={this.props.title}
         body={<Project {...this.props} />}
       />
     )

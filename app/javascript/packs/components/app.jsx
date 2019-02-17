@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 // Components
 import HomePage from '../bundles/HomePage/home_page';
+import AccountSettingsMainContainer from '../bundles/AccountSettings/account_settings_main_container';
 import EmployeeContainer from '../bundles/Employee/components/employee_container';
 import ProjectContainer from '../bundles/Project/components/project_container';
 
@@ -19,7 +20,7 @@ class App extends React.Component {
             path="/employees"
             exact
             render={props => (
-              <EmployeeContainer router={props} {...props}/>
+              <AccountSettingsMainContainer router={props} {...props} accountSettingsViewId="editEmployee"/>
             )}
           />
           <Route path="/join_us" exact render={props => ( <h1>Join Us Page</h1>)} />
@@ -27,7 +28,7 @@ class App extends React.Component {
             path="/projects"
             exact
             render={props => (
-              <ProjectContainer router={props} {...props} />
+              <AccountSettingsMainContainer router={props} {...props} accountSettingsViewId="editProject"/>
             )}
           />
         </div>
